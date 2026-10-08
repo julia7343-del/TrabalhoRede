@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador & Guia de Diagnóstico de Redes</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <i class="fa-solid fa-network-wired"></i>
+        <div>
+          <h2>NetTrouble Lab</h2>
+          <span>Diagnóstico de Redes</span>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <div class="nav-section-label">Geral</div>
+        <button class="nav-btn active" data-tab="dashboard">
+          <i class="fa-solid fa-chart-line"></i> Visão Geral
+        </button>
+
+        <div class="nav-section-label">Cenários de Problemas</div>
+        <button class="nav-btn" data-tab="cabo">
+          <i class="fa-solid fa-plug-circle-xmark"></i> 1. Cabo Defeituoso
+        </button>
+        <button class="nav-btn" data-tab="ip-incorreto">
+          <i class="fa-solid fa-sliders"></i> 2. IP Incorreto
+        </button>
+        <button class="nav-btn" data-tab="conflito">
+          <i class="fa-solid fa-clone"></i> 3. Conflito de IP
+        </button>
+        <button class="nav-btn" data-tab="dns">
+          <i class="fa-solid fa-globe"></i> 4. Falha de DNS
+        </button>
+        <button class="nav-btn" data-tab="internet">
+          <i class="fa-solid fa-wifi"></i> 5. Sem Internet (Gateway)
+        </button>
+
+        <div class="nav-section-label">Prática & Entrega</div>
+        <button class="nav-btn" data-tab="terminal">
+          <i class="fa-solid fa-terminal"></i> Terminal Interativo
+        </button>
+        <button class="nav-btn" data-tab="github-docs">
+          <i class="fa-brands fa-github"></i> Gerador de README.md
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p><i class="fa-solid fa-graduation-cap"></i> Projeto Acadêmico Moodle</p>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- DASHBOARD TAB -->
+      <section id="dashboard" class="tab-content active">
+        <header class="page-header">
+          <h1>Diagnóstico e Solução de Problemas em Redes</h1>
+          <p>Plataforma para simulação, análise e documentação de falhas comuns em infraestrutura de rede.</p>
+        </header>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <i class="fa-solid fa-bug stat-icon text-red"></i>
+            <h3>5 Cenários</h3>
+            <p>Falhas de Hardware, IP, DNS, Conflitos e Gateway.</p>
+          </div>
+          <div class="stat-card">
+            <i class="fa-solid fa-terminal stat-icon text-green"></i>
+            <h3>Terminal CLI</h3>
+            <p>Comandos ping, ipconfig, nslookup, tracert e arp.</p>
+          </div>
+          <div class="stat-card">
+            <i class="fa-brands fa-github stat-icon text-purple"></i>
+            <h3>Documentação</h3>
+            <p>Pronto para exportar no README.md do GitHub.</p>
+          </div>
+        </div>
+
+        <h2 class="section-title"><i class="fa-solid fa-toolbox"></i> Ferramentas de Linha de Comando</h2>
+        <div class="tools-grid">
+          <div class="tool-card">
+            <code>ping &lt;host&gt;</code>
+            <p>Testa conectividade IP enviando pacotes ICMP Echo Request. Mede tempo de resposta (latência) e perda de pacotes.</p>
+          </div>
+          <div class="tool-card">
+            <code>ipconfig /all</code>
+            <p>Exibe detalhes de IP, máscara de sub-rede, gateway padrão, endereço MAC e servidores DNS do host.</p>
+          </div>
+          <div class="tool-card">
+            <code>nslookup &lt;dominio&gt;</code>
+            <p>Consulta os servidores DNS para verificar a resolução de nomes em endereços IP e identificar falhas de resolução.</p>
+          </div>
+          <div class="tool-card">
+            <code>tracert &lt;destino&gt;</code>
+            <p>Mapeia a rota até o destino, mostrando todos os saltos (roteadores) no caminho e onde ocorre interrupção.</p>
+          </div>
+          <div class="tool-card">
+            <code>arp -a</code>
+            <p>Exibe a tabela ARP local que mapeia endereços IP conhecidos para seus respectivos endereços físicos (MAC).</p>
+          </div>
+          <div class="tool-card">
+            <code>netstat -an</code>
+            <p>Lista todas as conexões de rede ativas e portas de escuta do sistema operacional.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CABO DEFEITUOSO -->
+      <section id="cabo" class="tab-content">
+        <header class="page-header">
+          <span class="badge badge-red">Camada 1 - Física</span>
+          <h1>1. Cabo de Rede Desconectado ou Defeituoso</h1>
+        </header>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-triangle-exclamation text-yellow"></i> O que está acontecendo?</h3>
+          <p>O sistema operacional indica que a mídia de rede está desconectada. A interface não possui link elétrico/óptico com o switch ou roteador.</p>
+        </div>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-magnifying-glass-chart"></i> Causas Prováveis</h3>
+          <ul>
+            <li>Cabo desconectado da placa de rede ou da tomada de parede.</li>
+            <li>Conector RJ-45 com trava quebrada ou crimpagem defeituosa.</li>
+            <li>Rompimento interno nos pares trançados do cabo.</li>
+            <li>Porta do switch/roteador queimada ou desativada administrativamente.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-terminal text-green"></i> Comandos para Identificação</h3>
+          <pre class="code-block"><code># Windows:
+ipconfig /all
+
+# Linux:
+ip link show</code></pre>
+          <p><strong>Resultado típico:</strong> <i>"Estado da mídia: Mídia desconectada"</i> ou <i>"NO-CARRIER"</i>.</p>
+        </div>
+
+        <div class="card border-left-green">
+          <h3><i class="fa-solid fa-wrench text-green"></i> Como Resolver</h3>
+          <ol>
+            <li>Verifique se o cabo está devidamente encaixado até escutar o clique da trava.</li>
+            <li>Observe se os LEDs (Link/Activity) da placa de rede do computador piscam.</li>
+            <li>Substitua o cabo por um testado (Cat5e/Cat6).</li>
+            <li>Conecte o cabo em outra porta do switch ou roteador.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- IP INCORRETO -->
+      <section id="ip-incorreto" class="tab-content">
+        <header class="page-header">
+          <span class="badge badge-orange">Camada 3 - Rede</span>
+          <h1>2. Endereço IP Incorreto / Sub-rede Incompatível</h1>
+        </header>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-triangle-exclamation text-yellow"></i> O que está acontecendo?</h3>
+          <p>O computador está fisicamente conectado, mas não consegue conversar com o Gateway nem com outros computadores da LAN por estar configurado em uma sub-rede diferente.</p>
+        </div>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-magnifying-glass-chart"></i> Causas Prováveis</h3>
+          <ul>
+            <li>Atribuição manual de IP estático incorreto (ex: IP 10.0.0.15 numa rede 192.168.1.0/24).</li>
+            <li>Máscara de sub-rede configurada incorretamente (ex: 255.255.255.240 em vez de 255.255.255.0).</li>
+            <li>Falha do servidor DHCP ao não renovar as configurações de IP.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-terminal text-green"></i> Comandos para Identificação</h3>
+          <pre class="code-block"><code>ipconfig
+ping 192.168.1.1</code></pre>
+          <p><strong>Resultado típico:</strong> <i>"Esgotado o tempo limite do pedido"</i> ou <i>"Host de destino inacessível"</i>.</p>
+        </div>
+
+        <div class="card border-left-green">
+          <h3><i class="fa-solid fa-wrench text-green"></i> Como Resolver</h3>
+          <ol>
+            <li>Configure a interface de rede para obter IP automaticamente via DHCP.</li>
+            <li>Caso utilize IP fixo, ajuste o IP para a mesma sub-rede do roteador com a máscara correta.</li>
+            <li>Execute os comandos de renovação: <code>ipconfig /release</code> e <code>ipconfig /renew</code>.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- CONFLITO DE IP -->
+      <section id="conflito" class="tab-content">
+        <header class="page-header">
+          <span class="badge badge-purple">Camada 2/3 - Enlace e Rede</span>
+          <h1>3. Conflito de Endereço IP</h1>
+        </header>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-triangle-exclamation text-yellow"></i> O que está acontecendo?</h3>
+          <p>Dois dispositivos na mesma rede local estão utilizando o mesmo endereço IP, resultando em oscilações e queda de conexão para ambos.</p>
+        </div>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-magnifying-glass-chart"></i> Causas Prováveis</h3>
+          <ul>
+            <li>Atribuição manual de um IP fixo que já faz parte do escopo dinâmico do servidor DHCP.</li>
+            <li>Dois dispositivos configurados manualmente com o mesmo IP.</li>
+            <li>Falha na tabela de leases do servidor DHCP.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-terminal text-green"></i> Comandos para Identificação</h3>
+          <pre class="code-block"><code>arp -a
+# Verifique se o endereço IP aparece associado a múltiplos endereços MAC na tabela.</code></pre>
+        </div>
+
+        <div class="card border-left-green">
+          <h3><i class="fa-solid fa-wrench text-green"></i> Como Resolver</h3>
+          <ol>
+            <li>Libere e renove o IP via linha de comando: <code>ipconfig /release</code> e depois <code>ipconfig /renew</code>.</li>
+            <li>Em IPs estáticos, altere a máquina para um endereço livre ou configure uma reserva DHCP no roteador pelo endereço MAC.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- FALHA DE DNS -->
+      <section id="dns" class="tab-content">
+        <header class="page-header">
+          <span class="badge badge-blue">Camada 7 - Aplicação</span>
+          <h1>4. Problema de Resolução de Nome (DNS)</h1>
+        </header>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-triangle-exclamation text-yellow"></i> O que está acontecendo?</h3>
+          <p>Você consegue acessar serviços digitando o endereço IP direto (ex: http://1.1.1.1), mas os navegadores não carregam URLs de domínio (ex: www.google.com).</p>
+        </div>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-magnifying-glass-chart"></i> Causas Prováveis</h3>
+          <ul>
+            <li>Servidor DNS configurado está fora do ar ou inacessível.</li>
+            <li>Endereço do servidor DNS incorreto na placa de rede.</li>
+            <li>Cache de DNS local corrompido.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-terminal text-green"></i> Comandos para Identificação</h3>
+          <pre class="code-block"><code>nslookup www.google.com
+ping 8.8.8.8</code></pre>
+          <p>Se o <code>ping 8.8.8.8</code> funcionar, mas o <code>nslookup</code> falhar, confirma-se o problema exclusivo no serviço de DNS.</p>
+        </div>
+
+        <div class="card border-left-green">
+          <h3><i class="fa-solid fa-wrench text-green"></i> Como Resolver</h3>
+          <ol>
+            <li>Limpe o cache do DNS local: <code>ipconfig /flushdns</code>.</li>
+            <li>Altere os servidores DNS da interface para servidores públicos confiáveis:
+              <ul>
+                <li><strong>Cloudflare:</strong> 1.1.1.1 e 1.0.0.1</li>
+                <li><strong>Google:</strong> 8.8.8.8 e 8.8.4.4</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- SEM INTERNET (GATEWAY) -->
+      <section id="internet" class="tab-content">
+        <header class="page-header">
+          <span class="badge badge-red">Camada 3 - Roteamento</span>
+          <h1>5. Computador sem Acesso à Internet (Gateway)</h1>
+        </header>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-triangle-exclamation text-yellow"></i> O que está acontecendo?</h3>
+          <p>A máquina consegue se comunicar localmente (ex: acessa impressoras e outros computadores), mas não consegue sair para redes externas (Internet).</p>
+        </div>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-magnifying-glass-chart"></i> Causas Prováveis</h3>
+          <ul>
+            <li>Gateway Padrão (Default Gateway) não configurado no host.</li>
+            <li>IP do Gateway incorreto.</li>
+            <li>Roteador de borda sem conexão WAN com o Provedor de Internet (ISP).</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-terminal text-green"></i> Comandos para Identificação</h3>
+          <pre class="code-block"><code>ipconfig
+ping 192.168.1.1
+tracert 8.8.8.8</code></pre>
+        </div>
+
+        <div class="card border-left-green">
+          <h3><i class="fa-solid fa-wrench text-green"></i> Como Resolver</h3>
+          <ol>
+            <li>Verifique se o IP do Gateway Padrão corresponde ao IP do roteador local.</li>
+            <li>Testar conexão do Gateway reiniciando o modem/roteador.</li>
+            <li>Entrar em contato com o Provedor de Internet para checar instabilidade externa na linha WAN.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- TERMINAL INTERATIVO -->
+      <section id="terminal" class="tab-content">
+        <header class="page-header">
+          <h1>Simulador de Terminal de Diagnóstico</h1>
+          <p>Escolha um cenário de falha e digite comandos de rede para simular o diagnóstico em tempo real.</p>
+        </header>
+
+        <div class="card">
+          <label for="scenario-select"><strong>Selecione o Estado da Rede:</strong></label>
+          <select id="scenario-select" class="form-control">
+            <option value="normal">Rede Operando Normalmente (Sem Falhas)</option>
+            <option value="cabo">Cenário 1: Cabo Desconectado</option>
+            <option value="ip-incorreto">Cenário 2: IP Incorreto</option>
+            <option value="conflito">Cenário 3: Conflito de IP</option>
+            <option value="dns">Cenário 4: Falha de DNS</option>
+            <option value="internet">Cenário 5: Sem Internet / Gateway</option>
+          </select>
+        </div>
+
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="terminal-title">Prompt de Comando - Diagnostic Terminal</span>
+          </div>
+          <div id="terminal-body" class="terminal-body">
+            <div class="term-line">NetTrouble CLI [Versão 1.0.0]</div>
+            <div class="term-line">Digite 'help' para ver os comandos disponíveis.</div>
+            <div class="term-line">&nbsp;</div>
+          </div>
+          <div class="terminal-input-row">
+            <span class="prompt">C:\Users\Aluno&gt;</span>
+            <input type="text" id="cli-input" placeholder="Digite ipconfig, ping 8.8.8.8, nslookup google.com..." autofocus>
+          </div>
+        </div>
+      </section>
+
+      <!-- GITHUB DOCS GENERATOR -->
+      <section id="github-docs" class="tab-content">
+        <header class="page-header">
+          <h1>Documentação para o GitHub (README.md)</h1>
+          <p>Copie o conteúdo formatado em Markdown para colocar no seu repositório do GitHub.</p>
+        </header>
+
+        <div class="card">
+          <div class="flex-between">
+            <h3>README.md</h3>
+            <button id="copy-readme" class="btn btn-primary"><i class="fa-regular fa-copy"></i> Copiar Código</button>
+          </div>
+          <textarea id="readme-text" class="code-textarea" readonly rows="18">
+# Projeto de Diagnóstico e Resolução de Problemas em Redes
+
+## 🎯 Objetivo
+Este projeto visa simular, identificar, analisar e resolver 5 situações de falhas comuns encontradas em ambientes de redes de computadores, utilizando ferramentas de linha de comando e boas práticas de solução de problemas (troubleshooting).
+
+---
+
+## 🧰 Ferramentas Utilizadas
+- **ipconfig / ip a**: Análise de configurações de interface.
+- **ping**: Teste de conectividade e alcance.
+- **nslookup**: Teste e verificação do serviço DNS.
+- **tracert / traceroute**: Mapeamento de rotas e identificação de saltos.
+- **arp -a**: Verificação da tabela ARP e resolução de endereços MAC.
+
+---
+
+## 📂 Resumo dos Problemas Analisados
+
+| # | Problema | Sintoma Principal | Ferramentas Principais |
+|---|---|---|---|
+| 1 | Cabo Desconectado/Defeituoso | Mídia desconectada | Inspeção Física, `ipconfig` |
+| 2 | Endereço IP Incorreto | Sem comunicação na LAN | `ipconfig`, `ping` |
+| 3 | Conflito de Endereço IP | Instabilidade e alertas no SO | `arp -a`, `ipconfig` |
+| 4 | Falha de DNS | Acesso via IP OK, via URL Falha | `nslookup`, `ping 8.8.8.8` |
+| 5 | Sem Acesso à Internet | Acesso apenas local | `tracert`, `ping <Gateway>` |
+
+---
+
+## 👨‍💻 Autor
+Desenvolvido para a entrega do projeto prático de Redes de Computadores.
+          </textarea>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
